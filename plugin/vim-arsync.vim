@@ -5,11 +5,12 @@
 " License: MIT
 
 function! LoadConf()
+    let l:vim_arsync_path = findfile(".vim-arsync", ".;")
     let l:conf_dict = {}
-    let l:file_exists = filereadable('.vim-arsync')
+    let l:file_exists = filereadable(l:vim_arsync_path)
 
     if l:file_exists > 0
-        let l:conf_options = readfile('.vim-arsync')
+        let l:conf_options = readfile(l:vim_arsync_path)
         for i in l:conf_options
             let l:var_name = substitute(i[0:stridx(i, ' ')], '^\s*\(.\{-}\)\s*$', '\1', '')
             if l:var_name == 'ignore_path'
